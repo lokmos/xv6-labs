@@ -127,6 +127,8 @@ found:
   p->context.ra = (uint64)forkret;
   p->context.sp = p->kstack + PGSIZE;
 
+  // zyk: initialize trace_mask
+  p->trace_mask = 0;
   return p;
 }
 
@@ -294,6 +296,9 @@ fork(void)
   pid = np->pid;
 
   np->state = RUNNABLE;
+  
+  // zyk: copy trace mask
+  np->trace_mask = p->trace_mask;
 
   release(&np->lock);
 
