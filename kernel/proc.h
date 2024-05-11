@@ -103,4 +103,10 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+  //zyk: alarm starts here
+  int alarm_interval;          
+  void(*alarm_handler)();      
+  int alarm_ticks;             
+  struct trapframe *alarm_trapframe;  
+  int alarm_goingoff;          
 };
